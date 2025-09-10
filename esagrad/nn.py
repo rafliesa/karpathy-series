@@ -28,7 +28,7 @@ class Layer:
     return [p for neuron in self.neurons for p in neuron.parameters()]
 
 
-class MLP:
+class EsaPerceptron:
 
   def __init__(self, nin, nouts, lr=0.01, epoch=20):
     self.lr = lr
