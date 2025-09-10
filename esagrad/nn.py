@@ -1,4 +1,5 @@
 import random
+from engine import Value
 
 class Neuron:
 
@@ -44,6 +45,11 @@ class MLP:
     return [p for layer in self.layers for p in layer.parameters()]
 
   def fit(self, X, y):
+    if isinstance(X, pd.DataFrame):
+        X = X.to_numpy().tolist()
+    if isinstance(y, (pd.Series, pd.DataFrame)):
+        y = y.to_numpy().flatten().tolist()
+        
     for i in range(self.epoch):
       ypred = [self.__forward__(x) for x in X]
       loss = sum([(ygt-yout)**2 for ygt, yout in zip(y, ypred)])
